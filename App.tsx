@@ -1,20 +1,16 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import BotonInicio from "./src/components/BotonInicio";
 
 export default function App() {
+  const handleLogin = () => {
+    console.log("Sesion iniciada ");
+  };
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <BotonInicio
+      titulo="Iniciar sesion"
+      onPress={handleLogin}
+      color="#007BFF" 
+    />
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
