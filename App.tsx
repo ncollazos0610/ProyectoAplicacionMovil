@@ -2,6 +2,7 @@ import BotonInicio from "./src/components/BotonInicio";
 import React from "react";
 import { View, StyleSheet } from "react-native";
 import LikeButton from "./src/components/LikeButton";
+import Menu from "./src/components/Menu";
 
 export default function App() {
   const handleLogin = () => {
@@ -16,6 +17,7 @@ export default function App() {
           onPress={handleLogin}
           color="#007BFF"
         />
+        <Menu />
 
         {/* Aquí irán otros componentes como el menú o el botón de login */}
         <LikeButton />
