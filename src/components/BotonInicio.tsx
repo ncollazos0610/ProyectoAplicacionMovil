@@ -33,7 +33,6 @@ const styles = StyleSheet.create({
     flex: 1, 
     justifyContent: "center",
     alignItems: "center", 
-    backgroundColor: "#f2f2f2", 
   },
   button: {
     paddingVertical: 14,

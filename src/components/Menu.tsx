@@ -7,7 +7,7 @@ export default function MobileMenu() {
   return (
     <View style={styles.header}>
       <View style={styles.logoContainer}>
-        <Image source={require("../assets/logotipo.png")} style={styles.logo} />
+        <Image source={require("../../assets/logotipo.png")} style={styles.logo} />
         <Text style={styles.title}>Natural's Samada</Text>
       </View>
 
