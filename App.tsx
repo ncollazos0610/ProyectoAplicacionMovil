@@ -11,15 +11,14 @@ export default function App() {
 
   return (
     <>
-      <View style={styles.container}>
+      <View style={[styles.container, {flex:1}]}>
+        <Menu />
         <BotonInicio
           titulo="Iniciar sesion"
           onPress={handleLogin}
           color="#007BFF"
         />
-        <Menu />
-
-        {/* Aquí irán otros componentes como el menú o el botón de login */}
+        
         <LikeButton />
       </View>
     </>
@@ -29,6 +28,15 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
   },
 });
+
+
+{/* 
+    <View style={{ flex: 1 }}>
+      <MobileMenu />
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text style={{ color: "white" }}>Welcome to the app</Text>
+      </View>
+    </View>
+ */}
