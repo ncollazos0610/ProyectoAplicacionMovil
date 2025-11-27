@@ -9,7 +9,7 @@ import { ThemeProvider } from "./src/components/context/ThemeContext";
 import { LanguageProvider } from "./src/components/context/Language";
 
 // ------ Componentes ------
-import Landing from "./src/components/screens/LandingPage";
+import Landing from "./src/screens/LandingPage";
 import LikeButton from "./src/components/LikeButton";
 import Menu from "./src/components/Menu";
 import LoginScreen from "./src/screens/LoginScreen";

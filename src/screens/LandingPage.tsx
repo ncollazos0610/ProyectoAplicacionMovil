@@ -9,10 +9,10 @@ import {
   StyleSheet,
 } from "react-native";
 
-import LikeButton from "../LikeButton";
-import { useThemeContext } from "../context/ThemeContext";
-import { useLanguageContext } from "../context/Language";
-import BotonInicio from "../BotonInicio";
+import LikeButton from "../components/LikeButton";
+import { useThemeContext } from "../components/context/ThemeContext";
+import { useLanguageContext } from "../components/context/Language";
+import BotonInicio from "../components/BotonInicio";
 
 export default function Landing() {
   const { language, toggleLanguage } = useLanguageContext();
