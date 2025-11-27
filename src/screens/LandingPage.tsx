@@ -9,16 +9,19 @@ import {
   StyleSheet,
 } from "react-native";
 
-import LikeButton from "../components/LikeButton";
+import { useNavigation } from "@react-navigation/native"; 
 import { useThemeContext } from "../components/context/ThemeContext";
 import { useLanguageContext } from "../components/context/Language";
 import BotonInicio from "../components/BotonInicio";
 
 export default function Landing() {
+  const navigation = useNavigation<any>(); 
+
   const { language, toggleLanguage } = useLanguageContext();
   const { theme, toggleTheme } = useThemeContext();
+
   const handleLogin = () => {
-    console.log("Sesión iniciada");
+    navigation.navigate("Login"); 
   };
 
   const text = {
@@ -44,7 +47,7 @@ export default function Landing() {
       footerDesc:
         "Natural's Samada es una empresa dedicada al bienestar natural.",
       footerLicense: "© Natural's Samada. Todos los derechos reservados.",
-      footerCopy: "Desarrollado con ❤️ por Samada Dev",
+      footerCopy: "Desarrollado con ❤️ por NJP Dev",
     },
 
     en: {
@@ -78,7 +81,7 @@ export default function Landing() {
     <ScrollView style={{ flex: 1, backgroundColor: isDark ? "#000" : "#fff" }}>
       {/* ---------- BANNER ---------- */}
       <ImageBackground
-        source={require("../../../assets/Products.png")}
+        source={require("../../assets/Products.png")}
         style={styles.banner}
         imageStyle={{ resizeMode: "cover" }}
       >
@@ -93,8 +96,7 @@ export default function Landing() {
             <Text style={styles.catalogText}>{t.catalog}</Text>
           </TouchableOpacity>
 
-          <View style={{ marginTop: 130 }}>
-          </View>
+          <View style={{ marginTop: 130 }} />
         </View>
       </ImageBackground>
 
@@ -107,8 +109,8 @@ export default function Landing() {
         <View style={styles.ctaRow}>
           <BotonInicio
             titulo="Iniciar Sesión"
-            onPress={handleLogin}
-            color="#fff"
+            onPress={handleLogin} // ← AQUI NAVEGA
+            color="#000000ff"
           />
         </View>
       </View>

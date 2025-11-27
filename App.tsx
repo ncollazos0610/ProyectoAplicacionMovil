@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View, StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -24,28 +24,23 @@ type Props = NativeStackScreenProps<RootStackParamList, "Inicio">;
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
-
 function PantallaPrincipal({ navigation }: Props) {
-  const handleLogin = () => {
-    console.log("Sesión iniciada");
-  };
-  navigation.navigate("Login");
 
   return (
     <ThemeProvider>
       <LanguageProvider>
 
         <View style={styles.container}>
-
-          {/* ----------- MENÚ SUPERIOR ----------- */}
+          
+          {/* MENÚ */}
           <Menu />
 
-          {/* ----------- LANDING PAGE (Scrollable por dentro) ----------- */}
+          {/* LANDING */}
           <View style={{ flex: 1 }}>
-            <Landing/>
+            <Landing />
           </View>
 
-          {/* ----------- SECCIÓN FINAL ----------- */}
+          {/* BOTÓN LIKE */}
           <View style={styles.bottomButtons}>
             <LikeButton />
           </View>
@@ -54,8 +49,8 @@ function PantallaPrincipal({ navigation }: Props) {
 
       </LanguageProvider>
     </ThemeProvider>
-  )
-  };
+  );
+}
 
 export default function App() {
   return (
