@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { ImageSourcePropType } from "react-native";
+
 import {
   View,
   Text,
@@ -17,7 +19,7 @@ interface Producto {
   precio: number;
   descuento: number;
   categoria: string;
-  imagen: string;
+  imagen: ImageSourcePropType;
 }
 
 export default function Productos() {
@@ -26,27 +28,33 @@ export default function Productos() {
   const [mostrarCarrito, setMostrarCarrito] = useState(false);
   const [carrito, setCarrito] = useState<Producto[]>([]);
 
-  
   const productos: Producto[] = [
     {
       id: 1,
-      nombre: "Aceite Esencial Lavanda",
+      nombre: "Gotas de Valeriana",
       precio: 25000,
       descuento: 10,
-      categoria: "Aceites esenciales",
-      imagen: "https://via.placeholder.com/200",
+      categoria: "Goteros",
+      imagen: require("../../assets/Valeriana.png"),
     },
     {
       id: 2,
-      nombre: "Té Detox Natural",
-      precio: 18000,
+      nombre: "Te Verde Natural",
+      precio: 45000,
       descuento: 15,
-      categoria: "Tés e infusiones",
-      imagen: "https://via.placeholder.com/200",
+      categoria: "Pastilleros",
+      imagen: require("../../assets/TeVerde.png"),
+    },
+    {
+      id: 3,
+      nombre: "Promocion Gripe",
+      precio: 60000,
+      descuento: 20,
+      categoria: "Jarabes",
+      imagen: require("../../assets/promo.png"),
     },
   ];
 
-  
   const productosFiltrados = productos.filter((p) => {
     const coincideTexto = p.nombre
       .toLowerCase()
@@ -59,7 +67,6 @@ export default function Productos() {
     return coincideTexto && coincideCategoria;
   });
 
- 
   const agregarAlCarrito = (producto: Producto) => {
     setCarrito([...carrito, producto]);
   };
@@ -76,7 +83,9 @@ export default function Productos() {
 
         <TouchableOpacity onPress={() => setMostrarCarrito(true)}>
           <Image
-            source={{ uri: "https://cdn-icons-png.flaticon.com/512/263/263142.png" }}
+            source={{
+              uri: "https://cdn-icons-png.flaticon.com/512/263/263142.png",
+            }}
             style={styles.carritoIcon}
           />
         </TouchableOpacity>
@@ -96,7 +105,7 @@ export default function Productos() {
           <ScrollView>
             {carrito.map((item, index) => (
               <View key={index} style={styles.carritoItem}>
-                <Image source={{ uri: item.imagen }} style={styles.carritoImg} />
+                <Image source={item.imagen} style={styles.carritoImg} />
                 <Text style={styles.carritoNombre}>{item.nombre}</Text>
                 <Text style={styles.carritoPrecio}>${item.precio}</Text>
               </View>
@@ -154,8 +163,7 @@ export default function Productos() {
         contentContainerStyle={{ paddingBottom: 100 }}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            <Image source={{ uri: item.imagen }} style={styles.cardImg} />
-
+            <Image source={item.imagen} style={styles.cardImg} />
             <Text style={styles.cardName}>{item.nombre}</Text>
             <Text style={styles.cardPrice}>${item.precio}</Text>
 
@@ -171,7 +179,6 @@ export default function Productos() {
     </View>
   );
 }
-
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#f6f6f6", padding: 10 },
@@ -238,7 +245,6 @@ const styles = StyleSheet.create({
 
   btnText: { color: "white" },
 
-  
   modalCarrito: { flex: 1, padding: 20, backgroundColor: "#fff" },
 
   carritoHeader: {

@@ -13,11 +13,13 @@ import Landing from "./src/screens/LandingPage";
 import LikeButton from "./src/components/LikeButton";
 import Menu from "./src/components/Menu";
 import LoginScreen from "./src/screens/LoginScreen";
+import Productos from "./src/screens/Productos";
 
 // Tipos para navegación
 type RootStackParamList = {
   Inicio: undefined;
   Login: undefined;
+  Productos: undefined;
 };
 
 type Props = NativeStackScreenProps<RootStackParamList, "Inicio">;
@@ -36,7 +38,7 @@ function PantallaPrincipal({ navigation }: Props) {
           <Menu />
 
           {/* LANDING */}
-          <View style={{ flex: 1 }}>
+          <View style={{ flex: 1, marginTop: 120}}>
             <Landing />
           </View>
 
@@ -67,6 +69,11 @@ export default function App() {
           name="Login"
           component={LoginScreen}
           options={{ title: "Iniciar Sesión" }}
+        />
+                <Stack.Screen
+          name="Productos"
+          component={Productos}
+          options={{ title: "Productos" }}
         />
 
       </Stack.Navigator>

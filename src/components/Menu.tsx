@@ -1,89 +1,68 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  StyleSheet,
-} from "react-native";
+import { View, Text, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { useThemeContext } from "./context/ThemeContext";
 import { useLanguageContext } from "./context/Language";
-
+import { useNavigation } from "@react-navigation/native";
 
 export default function MobileMenu() {
   const [isOpen, setIsOpen] = useState(false);
-
   const { theme, toggleTheme } = useThemeContext();
-  const { language, toggleLanguage } = useLanguageContext();
-
+  const { toggleLanguage } = useLanguageContext();
+  const navigation = useNavigation<any>();
   const isDark = theme === "oscuro";
 
   return (
-    <View
-      style={[
-        styles.header,
-        { backgroundColor: isDark ? "#0e1116" : "#15803d" },
-      ]}
-    >
-      {/* LOGO + TÍTULO */}
+    <View style={[styles.header, { backgroundColor: isDark ? "#0e1116" : "#15803d" }]}>
       <View style={styles.logoContainer}>
-        <Image
-          source={require("../../assets/logotipo.png")}
-          style={styles.logo}
-        />
+        <Image source={require("../../assets/logotipo.png")} style={styles.logo} />
         <Text style={[styles.title, { color: "white" }]}>Natural's Samada</Text>
       </View>
 
-      {/* CONTENEDOR: LENGUAJE - TEMA - MENÚ */}
       <View style={styles.rightContainer}>
-        {/* CAMBIAR LENGUAJE */}
         <TouchableOpacity onPress={toggleLanguage} style={styles.actionBtn}>
           <Text style={styles.actionIcon}>🌐</Text>
         </TouchableOpacity>
 
-        {/* CAMBIAR TEMA */}
         <TouchableOpacity onPress={toggleTheme} style={styles.actionBtn}>
-          <Image
-            source={require("../../assets/tema.png")}
-            style={styles.themeIcon}
-          />
+          <Image source={require("../../assets/tema.png")} style={styles.themeIcon} />
         </TouchableOpacity>
 
-        {/* ABRIR / CERRAR MENÚ */}
         <TouchableOpacity onPress={() => setIsOpen(!isOpen)} style={styles.menuBtn}>
           <Text style={styles.menuIcon}>{isOpen ? "✕" : "☰"}</Text>
         </TouchableOpacity>
       </View>
 
-      {/* NAV */}
       {isOpen && (
-        <View
-          style={[
-            styles.menu,
-            { backgroundColor: isDark ? "#1a1f2b" : "#166534" },
-          ]}
-        >
+        <View style={[styles.menu, { backgroundColor: isDark ? "#1a1f2b" : "#166534" }]}>
           <TouchableOpacity
-            onPress={() => setIsOpen(false)}
             style={styles.menuItem}
+            onPress={() => {
+              setIsOpen(false);
+              navigation.navigate("Inicio");
+            }}
           >
             <Text style={styles.menuText}>Inicio</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => setIsOpen(false)}
             style={styles.menuItem}
+            onPress={() => {
+              setIsOpen(false);
+              navigation.navigate("Productos");
+            }}
           >
             <Text style={styles.menuText}>Productos</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
-            onPress={() => setIsOpen(false)}
             style={styles.menuItem}
+            onPress={() => {
+              setIsOpen(false);
+              navigation.navigate("Clientes");
+            }}
           >
             <Text style={styles.menuText}>Clientes</Text>
           </TouchableOpacity>
-          
         </View>
       )}
     </View>
@@ -97,10 +76,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    marginTop: 40
+    marginTop: 40,
+    zIndex: 100,
+    elevation: 100,
+    position: "absolute",
+    width: "100%",
   },
-
-  /* LOGO */
   logoContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -115,15 +96,11 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: "700",
   },
-
-  /* CONTENEDOR DE ACCIONES A LA DERECHA */
   rightContainer: {
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
   },
-
-  /* BOTÓN CAMBIAR LENGUAJE / TEMA */
   actionBtn: {
     width: 36,
     height: 36,
@@ -141,8 +118,6 @@ const styles = StyleSheet.create({
     tintColor: "#fff",
     resizeMode: "contain",
   },
-
-  /* BOTÓN DEL MENÚ */
   menuBtn: {
     padding: 4,
   },
@@ -150,9 +125,8 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 28,
   },
-
-  /* NAV */
   menu: {
+    zIndex: 200,
     position: "absolute",
     top: 64,
     right: 10,

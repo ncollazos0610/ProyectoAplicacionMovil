@@ -9,19 +9,19 @@ import {
   StyleSheet,
 } from "react-native";
 
-import { useNavigation } from "@react-navigation/native"; 
+import { useNavigation } from "@react-navigation/native";
 import { useThemeContext } from "../components/context/ThemeContext";
 import { useLanguageContext } from "../components/context/Language";
 import BotonInicio from "../components/BotonInicio";
 
 export default function Landing() {
-  const navigation = useNavigation<any>(); 
+  const navigation = useNavigation<any>();
 
   const { language, toggleLanguage } = useLanguageContext();
   const { theme, toggleTheme } = useThemeContext();
 
   const handleLogin = () => {
-    navigation.navigate("Login"); 
+    navigation.navigate("Login");
   };
 
   const text = {
@@ -92,7 +92,10 @@ export default function Landing() {
 
           <Text style={styles.bannerDesc}>{t.description}</Text>
 
-          <TouchableOpacity style={styles.catalogBtn}>
+          <TouchableOpacity
+            style={styles.catalogBtn}
+            onPress={() => navigation.navigate("Productos")}
+          >
             <Text style={styles.catalogText}>{t.catalog}</Text>
           </TouchableOpacity>
 
