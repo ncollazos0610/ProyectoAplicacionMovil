@@ -1,11 +1,15 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-import BotonInicio from "./src/components/BotonInicio";
+// ------ Contextos ------
+import { ThemeProvider } from "./src/components/context/ThemeContext";
+import { LanguageProvider } from "./src/components/context/Language";
+
+// ------ Componentes ------
+import Landing from "./src/components/screens/LandingPage";
 import LikeButton from "./src/components/LikeButton";
 import Menu from "./src/components/Menu";
 import LoginScreen from "./src/screens/LoginScreen";
@@ -23,24 +27,35 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function PantallaPrincipal({ navigation }: Props) {
   const handleLogin = () => {
-    navigation.navigate("Login");
+    console.log("Sesión iniciada");
   };
+  navigation.navigate("Login");
 
   return (
-    <View style={[styles.container, { flex: 1 }]}>
-      <Menu />
+    <ThemeProvider>
+      <LanguageProvider>
 
-      <BotonInicio
-        titulo="Iniciar sesión"
-        onPress={handleLogin}
-        color="#007BFF"
-      />
+        <View style={styles.container}>
 
-      <LikeButton />
-    </View>
-  );
-}
+          {/* ----------- MENÚ SUPERIOR ----------- */}
+          <Menu />
 
+          {/* ----------- LANDING PAGE (Scrollable por dentro) ----------- */}
+          <View style={{ flex: 1 }}>
+            <Landing/>
+          </View>
+
+          {/* ----------- SECCIÓN FINAL ----------- */}
+          <View style={styles.bottomButtons}>
+            <LikeButton />
+          </View>
+
+        </View>
+
+      </LanguageProvider>
+    </ThemeProvider>
+  )
+  };
 
 export default function App() {
   return (
@@ -64,8 +79,15 @@ export default function App() {
   );
 }
 
+// ------ Estilos ------
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#111",
+  },
+  bottomButtons: {
+    paddingVertical: 0,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
